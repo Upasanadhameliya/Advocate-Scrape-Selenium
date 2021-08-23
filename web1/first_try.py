@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+import time
 
 driver = webdriver.Chrome("D:\\upa\\downloads\\chromedriver_win32\\chromedriver.exe")
 
@@ -23,11 +24,12 @@ element = driver.find_element_by_class_name('dxb-hb')
 ActionChains(driver).move_to_element(element).click(element).perform()
     # # driver.get("https://www.cyprusbar.org/CypriotAdvocateMembersPage.aspx")
 # driver.implicitly_wait(10)
+time.sleep(2)
 
 # driver.execute_script("window.history.go(-1)")
 # driver.get("https://www.cyprusbar.org/CypriotAdvocateMembersPage.aspx")
 # driver.navigate().to("https://www.cyprusbar.org/CypriotAdvocateMembersPage.aspx")
-# driver.back()
+driver.back()
 # driver.implicitly_wait(10)
 
 # breakpoint()
