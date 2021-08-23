@@ -12,19 +12,24 @@ try:
 except:
     pass
 
-# for page in range(2,5):
-#     for ind,_ in enumerate(driver.find_elements_by_class_name('dxb-hb'),0):
-#         time.sleep(2)
+entries = 0
 
-#         element = driver.find_elements_by_class_name('dxb-hb')[ind]
-#         ActionChains(driver).move_to_element(element).click(element).perform()
-#         # print(driver.current_url)
-#         time.sleep(2)
-#         driver.back()
-#     time.sleep(2)
+for page in range(0,5):
+    for ind,_ in enumerate(driver.find_elements_by_class_name('dxb-hb'),0):
+        time.sleep(2)
+
+        element = driver.find_elements_by_class_name('dxb-hb')[ind]
+        ActionChains(driver).move_to_element(element).click(element).perform()
+        entries += 1
+        time.sleep(2)
+        print(f"Page:{page+1}, Entry:{entries}, Name: {driver.find_element_by_id('ctl00_ContentPlaceHolder1_TxtName_I').get_attribute('value')}")
+        driver.back()
+        # driver.execute_script("window.history.go(-1)")
+        time.sleep(2)
+        pg_element = driver.find_elements_by_class_name('dxp-num')[page]
+        pg_element.click()
 # breakpoint()
-pg_element = driver.find_elements_by_class_name('dxp-num')[1]
-pg_element.click()
+
 # ActionChains(driver).move_to_element(pg_element).click(pg_element).perform()
 
 # try:
