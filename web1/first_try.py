@@ -14,21 +14,39 @@ except:
 
 entries = 0
 
-for page in range(0,5):
+
+
+for page in range(7,13):
     for ind,_ in enumerate(driver.find_elements_by_class_name('dxb-hb'),0):
         time.sleep(2)
-
+        got_element = False
+        page_to_click = 7
+        while not got_element:
+            try:
+                pg_element = driver.find_element_by_link_text(str(page))
+                pg_element.click()
+                got_element = True
+            except:
+                prevpg_element = driver.find_element_by_link_text(str(page_to_click))
+                prevpg_element.click()
+                page_to_click +=2
+                time.sleep(2)
+        time.sleep(2)
         element = driver.find_elements_by_class_name('dxb-hb')[ind]
         ActionChains(driver).move_to_element(element).click(element).perform()
         entries += 1
         time.sleep(2)
-        print(f"Page:{page+1}, Entry:{entries}, Name: {driver.find_element_by_id('ctl00_ContentPlaceHolder1_TxtName_I').get_attribute('value')}")
+        print(f"Page:{page}, Entry:{entries}, Name: {driver.find_element_by_id('ctl00_ContentPlaceHolder1_TxtName_I').get_attribute('value')}")
         driver.back()
-        # driver.execute_script("window.history.go(-1)")
-        time.sleep(2)
-        pg_element = driver.find_elements_by_class_name('dxp-num')[page]
-        pg_element.click()
+
+
+
 # breakpoint()
+
+# driver.execute_script("window.history.go(-1)")
+# for ind,_ in enumerate(driver.find_elements_by_class_name('dxb-hb'),0):
+#     element = driver.find_elements_by_class_name('dxb-hb')[ind]
+#     print(element.get_attribute('id'))
 
 # ActionChains(driver).move_to_element(pg_element).click(pg_element).perform()
 
