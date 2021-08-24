@@ -29,30 +29,33 @@ try:
 except:
     pass
 
+out = driver.execute_script("ASPx.GVPagerOnClick('ctl00_ContentPlaceHolder1_LawyersGrid','PN7');")
+
 entries = 0
 
 
-for page in range(1, 51):
+for page in range(0, 51):
     for ind, _ in enumerate(driver.find_elements_by_class_name("dxb-hb"), 0):
         try:
             time.sleep(2)
-            got_element = False
-            page_to_click = 7
-            while not got_element:
-                try:
-                    print(f"Page:{page}")
-                    pg_element = driver.find_element_by_link_text(str(page))
-                    pg_element.click()
-                    got_element = True
-                except Exception as e:
-                    print(f"Page to click:{page_to_click}")
-                    # print("Exception")
-                    prevpg_element = driver.find_element_by_link_text(
-                        str(page_to_click)
-                    )
-                    prevpg_element.click()
-                    page_to_click += 2
-                    time.sleep(2)
+            # got_element = False
+            # page_to_click = 7
+            # while not got_element:
+                # try:
+                #     print(f"Page:{page}")
+                #     pg_element = driver.find_element_by_link_text(str(page))
+                #     pg_element.click()
+                #     got_element = True
+                # except Exception as e:
+                #     print(f"Page to click:{page_to_click}")
+                #     # print("Exception")
+                #     prevpg_element = driver.find_element_by_link_text(
+                #         str(page_to_click)
+                #     )
+                #     prevpg_element.click()
+                #     page_to_click += 2
+                #     time.sleep(2)
+            driver.execute_script(f"ASPx.GVPagerOnClick('ctl00_ContentPlaceHolder1_LawyersGrid','PN{page}');")
             time.sleep(2)
             element = driver.find_elements_by_class_name("dxb-hb")[ind]
             ActionChains(driver).move_to_element(element).click(element).perform()
@@ -99,6 +102,11 @@ for page in range(1, 51):
             continue
 
 df.to_excel("output.xlsx")
+
+
+#---------------------------------------------------------------------------------------------
+
+
 # breakpoint()
 
 # driver.execute_script("window.history.go(-1)")
