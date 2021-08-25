@@ -3,6 +3,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 import pandas as pd
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 df = pd.DataFrame(
     columns=[
@@ -37,30 +41,36 @@ entries = 0
 for page in range(0, 51):
     for ind, _ in enumerate(driver.find_elements_by_class_name("dxb-hb"), 0):
         try:
-            time.sleep(2)
-            # got_element = False
-            # page_to_click = 7
-            # while not got_element:
-                # try:
-                #     print(f"Page:{page}")
-                #     pg_element = driver.find_element_by_link_text(str(page))
-                #     pg_element.click()
-                #     got_element = True
-                # except Exception as e:
-                #     print(f"Page to click:{page_to_click}")
-                #     # print("Exception")
-                #     prevpg_element = driver.find_element_by_link_text(
-                #         str(page_to_click)
-                #     )
-                #     prevpg_element.click()
-                #     page_to_click += 2
-                #     time.sleep(2)
+            try:
+                element = WebDriverWait(driver, 60).until(
+                    EC.presence_of_all_elements_located((By.TAG_NAME, 'a'))
+                )
+            except:
+                driver.quit()
+                df.to_excel("output.xlsx")
+                exit(0)
+
             driver.execute_script(f"ASPx.GVPagerOnClick('ctl00_ContentPlaceHolder1_LawyersGrid','PN{page}');")
-            time.sleep(2)
+            try:
+                element = WebDriverWait(driver, 60).until(
+                    EC.presence_of_all_elements_located((By.TAG_NAME, 'input'))
+                )
+            except:
+                driver.quit()
+                df.to_excel("output.xlsx")
+                exit(0)
+                # ctl00_ContentPlaceHolder1_NameLabel
             element = driver.find_elements_by_class_name("dxb-hb")[ind]
             ActionChains(driver).move_to_element(element).click(element).perform()
             entries += 1
-            time.sleep(2)
+            try:
+                element = WebDriverWait(driver, 60).until(
+                    EC.presence_of_all_elements_located((By.TAG_NAME, 'a'))
+                )
+            except:
+                driver.quit()
+                df.to_excel("output.xlsx")
+                exit(0)
             print(
                 f"Entry:{entries}, Name: {driver.find_element_by_id('ctl00_ContentPlaceHolder1_TxtName_I').get_attribute('value')}"
             )

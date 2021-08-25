@@ -29,4 +29,4 @@ try:
 except:
     pass
 
-out = driver.execute_script("ASPx.GVPagerOnClick('ctl00_ContentPlaceHolder1_LawyersGrid','PN7');")
+out = driver.execute_script("WebForm_DoCallback('ctl00$MasterFirstLogInPopUpControl',arg,ASPx.Callback,'ctl00_MasterFirstLogInPopUpControl',ASPx.CallbackError,true);")
