@@ -89,7 +89,7 @@ try:
                         "Address": driver.find_element_by_id(
                             "ctl00_ContentPlaceHolder1_TxtAddress_I"
                         ).get_attribute("value"),
-                        "Phone": "+357"+driver.find_element_by_id(
+                        "Phone": "+"+driver.find_element_by_id(
                             "ctl00_ContentPlaceHolder1_TxtPhone_I"
                         ).get_attribute("value"),
                         "Court Box": driver.find_element_by_id(
