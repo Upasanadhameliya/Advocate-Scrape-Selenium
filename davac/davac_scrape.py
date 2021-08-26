@@ -100,19 +100,21 @@ table_rows = table.find_elements_by_tag_name("tr")
 print("table_rows found!")
 
 
-def store_data(driver, row, *args):
-    # print(args)
+def store_data(driver, row, row_count, row_type, *args):
     if args:
         row.find_element_by_tag_name("a").send_keys(Keys.CONTROL + Keys.RETURN)
-        return 1
-    return 0
+        row_type.append(("LW" if bool(args[0]) else "LT"))
+        return (row_count+1),row_type
+    return row_count,row_type
 
-row_count = 0
+row_count, row_type = 0,[]
 
 for r_ind, row in enumerate(table_rows, 1):
-    row_count += store_data(
+    row_count, row_type = store_data(
         driver,
         row,
+        row_count,
+        row_type,
         *[
             cell.text
             for c_ind, cell in enumerate(row.find_elements_by_tag_name("td"), 1)
@@ -120,13 +122,12 @@ for r_ind, row in enumerate(table_rows, 1):
         ]
     )
     if r_ind % 10 == 0:
-        time.sleep(10)
         for i in range(0,row_count):
             driver.switch_to.window(driver.window_handles[-1])
             driver.close()
-        row_count = 0
+        row_count, row_type = 0,[]
         driver.switch_to.window(driver.window_handles[-1])
-        if r_ind == 30:
-            break
+        # if r_ind == 30:
+            # break
 
-breakpoint()
+# breakpoint()
