@@ -38,7 +38,7 @@ out = driver.execute_script("ASPx.GVPagerOnClick('ctl00_ContentPlaceHolder1_Lawy
 entries = 0
 
 try:
-    for page in range(0, 51):
+    for page in range(0, 414):
         for ind, _ in enumerate(driver.find_elements_by_class_name("dxb-hb"), 0):
             try:
                 try:
