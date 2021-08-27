@@ -7,7 +7,7 @@ Project contains source code for scraping two websites containing information ab
 To run the code locally:
 - IMP: You would need to install the web driver for your browser for selenium to work
 - Clone the repository
-- `cd` in the `lineofstars` folder 
+- `cd` in the `Advocate` folder 
 - Create a virtual environment using `venv` or `conda` 
 - Activate your environment and do `pip install -r requirements.txt`
 - Change your driver path in the files
