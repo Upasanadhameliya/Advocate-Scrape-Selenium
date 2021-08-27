@@ -5,10 +5,13 @@ Project contains source code for scraping two websites containing information ab
 `Python version 3.8`
 
 To run the code locally:
+- IMP: You would need to install the web driver for your browser for selenium to work
 - Clone the repository
 - `cd` in the `lineofstars` folder 
 - Create a virtual environment using `venv` or `conda` 
 - Activate your environment and do `pip install -r requirements.txt`
+- Change your driver path in the files
+- Line 60, 27: `driver = webdriver.Chrome("D:\\your\\path\\to\\driver\\here\\chromedriver.exe")`
 - `cd` in the respective directory and `python <script_name>_scrape.py`
 
 ### Cyprus Website
