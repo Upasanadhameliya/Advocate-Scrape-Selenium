@@ -34,6 +34,8 @@ http://vyhledavac.cak.cz
 cd davac
 python davac_scrape.py
 ```
+NOTE: The scraping would be slow as there is a lot of intialisation for this website. So don't close the program and keep
+your patience. It would work. Only close if there is some error displayed :D
 ##### Output
 ![2021-08-27-11-39-44](https://user-images.githubusercontent.com/28010398/131080892-5f7269c3-5187-4965-9ec4-b424d062ec0f.png)
 
